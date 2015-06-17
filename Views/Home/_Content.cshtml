@@ -1,0 +1,27 @@
+﻿@model CSharpProject.Models.Article
+
+
+<h2>@Model.Title_</h2>
+
+        <p style="font-size:18px">@Model.Content</p>
+<br />
+
+@if(Model.Image != null)
+{
+
+<img src="~/ArticlesImages/@Model.Image" alt="image" style="width:200px; height:200px" />
+    <br />
+}
+
+<br />
+
+<br />
+
+@if(Model.File != null)
+{
+    <h4>You can download relevant material here: </h4>
+    <a href="~/files/@Model.File" download style="font-size:18px">@Model.File</a>
+}
+
+
+

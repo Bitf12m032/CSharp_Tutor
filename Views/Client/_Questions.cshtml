@@ -1,0 +1,38 @@
+﻿
+@model CSharpProject.Models.Question
+     
+
+
+                 <h2>@Model.Title?</h2>
+                 
+                 <br />
+                 
+                 <p style="font-size:16px"> @Model.Question1</p>
+                 <br />
+                  @if (Model.ProfilePicture != null)
+                  {
+                      <img src="~/ProfilePictures/@Model.ProfilePicture" alt="Image" style="width:50px; height:50px"/>
+                  }
+                 <p><b>Asked by @Model.username</b></p>
+                 <br />
+                  <p><b>Asked at @Model.Date</b></p>
+                
+                 <br /><br />
+
+    <h3>Your Answer: </h3>
+
+       <form action="/Client/PostAnswer" method="post" enctype="multipart/form-data" >
+            <textarea cols="70"; rows="10" placeholder="Your answer here....." name="Answer">
+            </textarea>
+
+         <div class="form-group input-group" style="padding-right:2em">
+          Insert Image: <input class="form-control" type="file" name="image" value=""/>     
+          </div>
+
+         <input type="hidden" value="@Model.Id" name="hidden" /> 
+    
+         <div class="form-group input-group" style="padding-right:2em">
+          <input class="form-control" style="background-color:orangered; color:white" type="submit" title="Answer" value="Post Your Answer"/>     
+          </div>
+
+       </form>

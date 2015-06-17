@@ -1,0 +1,254 @@
+﻿@{
+    Layout = null;
+}
+@model CSharpProject.Models.UserProfile
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SignUp</title>
+    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/myStyle.css") 
+    @Scripts.Render("~/bundles/modernizr")
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/jqueryval")
+
+   
+
+    
+</head>
+<body>
+
+    <!-- Header Section -->
+
+    <!-- Master Navigation -->
+
+        
+    <div class="navbar navbar-inverse " role="navigation">
+        <div class="container" >
+             <img src="/Content/images/csharp.jpg"  alt="Csharp Tutor" style="float:left"/>
+
+            <form action="/Home/Search" method="post">
+                <input type="text" name="search" id="search" />
+               
+                <button type="submit" style="background-color:#36dcdc">
+                <span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>   
+                
+            </form>
+             <!-- for auto search -->
+            <script>
+                $(document).ready(function () {
+                    $('#search').autocomplete(
+                    {
+                        source: "/Home/QuickSearch"
+                    });
+                })
+
+            </script> 
+
+            <ul class="nav navbar-nav" style="float:right">
+                <li style="background-color:#f6b04f; border-bottom-left-radius:10px; border-bottom-right-radius:10px; border-top-right-radius:10px; border-top-left-radius:10px; border-bottom-color:black">
+                    <a href="/Home/Index" style="color:whitesmoke"><span class="glyphicon glyphicon-home">&nbsp;Home </span> </a></li>
+                <li class="active" style="background-color:#f6b04f; border-bottom-left-radius:10px; border-bottom-right-radius:10px; border-top-right-radius:10px; border-top-left-radius:10px; border-bottom-color:black">
+                    <a href="/Home/SignUp" style="color:whitesmoke"><span class="glyphicon glyphicon-user">&nbsp;SignUp</span></a></li>
+                <li style="background-color:#f6b04f; border-bottom-left-radius:10px; border-bottom-right-radius:10px; border-top-right-radius:10px; border-top-left-radius:10px; border-bottom-color:black">
+                    <a href="/Home/Login" style="color:whitesmoke"><span class="glyphicon glyphicon-log-in">&nbsp;Login </span></a></li>
+                 <li style="background-color:#f6b04f; border-bottom-left-radius:10px; border-bottom-right-radius:10px; border-top-right-radius:10px; border-top-left-radius:10px; border-bottom-color:black">
+                    <a href="/Home/AskQuestion" style="color:whitesmoke"><span class="glyphicon glyphicon-question-sign">&nbsp;Ask a Question</span></a></li>
+                <li style="background-color:#f6b04f; border-bottom-left-radius:10px; border-bottom-right-radius:10px; border-top-right-radius:10px; border-top-left-radius:10px; border-bottom-color:black">
+                    <a href="/Home/SeeQuestions" style="color:whitesmoke"><span class="glyphicon glyphicon-eye-open">&nbsp;See Questions </span></a></li>
+                </ul>
+            </div>
+        </div>
+
+
+
+    <!-- Login -->
+    <div class="container">
+
+            <h1> Create your profile</h1>
+            
+          
+            
+            <div class="row" >
+            <div class="col-xs-6 col-md-4" style="background-color:wheat; border-color:orangered">
+               
+                    <!-- Sign Up Form -->
+                
+                    
+                    @using (Html.BeginForm("CreateProfile", "Home", FormMethod.Post, new {enctype = "multipart/form-data"} ))
+                    {
+                       @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        
+                        
+                        <div class="form-group input-group" style="padding-top:2em; padding-right:2em">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user">&nbsp;UserName:</i></span>&nbsp;
+                           
+                        
+                        @Html.EditorFor(m => m.UserName, new { @class = "form-control", id= "UserName"})
+                        @Html.ValidationMessageFor(m => m.UserName)
+                     <input type="button" id="b1" value="Check Availability" />
+
+                         <div id="result"></div> 
+   
+    <script>
+
+        $(document).ready(function () {
+
+            $('#checking').hide();
+
+            $('#b1').click(function () {
+
+                var userName = $('#UserName').val();
+
+                //alert('User Name ='+ userName);
+                $('#checking').show();
+                $.getJSON("/Home/CheckUserName?UserName=" + userName, function (data) {
+                    $('#checking').hide();
+                    if (data) {
+                        $('#result').text("User already exists in database");
+                        
+
+                    }
+                    else {
+                        $('#result').text("User Name is available");
+                    }
+                });
+
+            });
+
+        });
+    </script>  
+                          
+
+                        </div>
+                        
+                       
+                        
+                        
+                        <div class="form-group input-group" style="padding-right:2em">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope">&nbsp;Email: </i></span>&nbsp;
+                        
+                        @Html.EditorFor(m=> m.Email,  new { @class = "form-control"})
+                        @Html.ValidationMessageFor(m=>m.Email)
+                        </div>
+                        
+                        
+                        <div class="form-group input-group" style="padding-right:2em">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock">&nbsp;Password</i></span>&nbsp;
+                        @Html.EditorFor(m => m.Password, new { @class = "form-control"})
+                        @Html.ValidationMessageFor(m=>m.Password)
+                        
+
+                        </div>
+                        <div class="form-group input-group" style="padding-right:2em">
+                       <span class="input-group-addon"><i class="glyphicon glyphicon-lock">&nbsp;Password</i></span>&nbsp;
+                        @Html.EditorFor(m => m.ConfirmPassword, new { @class = "form-control"})
+                        @Html.ValidationMessageFor(m=>m.ConfirmPassword)
+                        
+                            
+                        </div>
+                        
+                        <div class="form-group input-group" style="padding-right:2em">
+                        Add Profile Picture: <input class="form-control" type="file" name="image" value=""/>     
+                        </div>
+
+               
+            
+                        <div class="checkbox">
+                        <label>
+                        <input type="checkbox"> I agree to the <a href="#">Terms and Conditions</a>
+                        </label>
+                        </div>
+                        <div class="form-group">
+                        <input type="submit" value="Create Your Profile" />
+                        </div> 
+           
+                    }
+
+                    
+                    </div>
+
+                
+                
+                    
+                      
+
+                    <!--Form Ended-->
+          
+
+  <div class="col-xs-7 col-md-4" style="float:right"></div>
+
+                </div>
+
+                </div>
+           
+   <br /><br />
+   
+        <!-- Footer -->
+
+    <footer style="background-color:#f6b04f; border:double; border-color:orangered">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3 footer-box wow fadeInUp">
+                        <h4 style="color:white"><b>About Us</b></h4>
+                        <div class="footer-box-text">
+	                        <p style="color:whitesmoke">
+	                        	C# Tutor is a Question Answer site for beginners to help them understand basics of C#.
+                                It is a single platform offering lectures of C# basics.
+	                        </p>
+	                        
+                        </div>
+                    </div>
+                    
+                    
+        
+                    <div class="col-sm-3 footer-box wow fadeInDown">
+                       
+                    </div>
+                    <div class="col-sm-3 footer-box wow fadeInUp">
+                        
+                    </div>
+                    <div class="col-sm-3 footer-box wow fadeInDown">
+                        <h4 style="color:white"><b>Contact Us </b></h4>
+                        <div class="footer-box-text footer-box-text-contact">
+	                        <p style="color:whitesmoke"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Address: Punjab University College of Information Technology, Allama Iqbal, Old Campus, The Mall road, Lahore</p>
+	                       
+	                        <p style="color:whitesmoke"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp; Email: bitf12m032@pucit.edu.pk</p>
+                        </div>
+                        <img src="/Content/images/facebook_40x40.png" alt="Follow me on facebook"/>
+                        <img src="/Content/images/twitter-b_40x40.png" alt="Follow me on twitter" />
+                    </div>
+                </div>
+                <div class="row">
+                	<div class="col-sm-12 wow fadeIn">
+                		<div class="footer-border"></div>
+                	</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-7 footer-copyright wow fadeIn">
+                        <p style="color:whitesmoke">&copy; @DateTime.Now.Year - All rights reserved by BITF12M032</p>
+                    </div>
+                    <div class="col-sm-5 footer-social wow fadeIn">
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+
+</body>
+</html>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/jqueryval")

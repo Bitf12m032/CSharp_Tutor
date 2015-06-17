@@ -1,0 +1,99 @@
+﻿@model CSharpProject.Models.Article
+<link rel="stylesheet"  href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/star-rating.css" media="all" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="~/Scripts/star-rating.js" type="text/javascript"></script>
+
+
+<h2>@Model.Title_</h2>
+
+        <p style="font-size:18px">@Model.Content</p>
+<br />
+
+@if(Model.Image != null)
+{
+
+<img src="~/ArticlesImages/@Model.Image" alt="image" style="width:200px; height:200px" />
+    <br />
+}
+
+<br />
+
+<br />
+
+@if(Model.File != null)
+{
+    <h4>You can download relevant material here: </h4>
+    <a href="~/files/@Model.File" download style="font-size:18px">@Model.File</a>
+}
+<br /><br /><br /><br /><br />
+
+<form action="/Client/SubmitRating" method="post">
+    
+    
+     <h3>Rate our posts: </h3>
+    <input id="rating" class="rating" data-stars="5" data-step="0.1" name="rate"/>
+    <input type="hidden" value="@Model.Id" name="id" />
+    <div class="form-group" style="margin-top:10px">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="reset" class="btn btn-default">Reset</button>
+    
+    </div>
+</form>
+<hr>
+<script>
+    jQuery(document).ready(function () {
+        $("#input-21f").rating({
+            starCaptions: function (val) {
+                if (val < 3) {
+                    return val;
+                } else {
+                    return 'high';
+                }
+            },
+            starCaptionClasses: function (val) {
+                if (val < 3) {
+                    return 'label label-danger';
+                } else {
+                    return 'label label-success';
+                }
+            },
+            hoverOnClear: false
+        });
+
+        $('#rating-input').rating({
+            min: 0,
+            max: 5,
+            step: 1,
+            size: 'lg',
+            showClear: false
+        });
+
+        $('#btn-rating-input').on('click', function () {
+            $('#rating-input').rating('refresh', {
+                showClear: true,
+                disabled: true
+            });
+        });
+
+
+        $('.btn-danger').on('click', function () {
+            $("#kartik").rating('destroy');
+        });
+
+        $('.btn-success').on('click', function () {
+            $("#kartik").rating('create');
+        });
+
+        $('#rating-input').on('rating.change', function () {
+            alert($('#rating-input').val());
+        });
+
+
+        $('.rb-rating').rating({ 'showCaption': true, 'stars': '3', 'min': '0', 'max': '3', 'step': '1', 'size': 'xs', 'starCaptions': { 0: 'status:nix', 1: 'status:wackelt', 2: 'status:geht', 3: 'status:laeuft' } });
+    });
+</script>
+
+
+

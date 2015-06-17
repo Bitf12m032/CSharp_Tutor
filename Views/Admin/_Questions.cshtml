@@ -1,0 +1,15 @@
+﻿@model CSharpProject.Models.Question
+
+   
+                 <h2>@Model.Title?</h2>
+                   
+@Html.ActionLink("Delete Question", "DeleteQuestion", new { id=Model.Id})
+                 
+                 <br />
+                 
+                 <p style="font-size:16px"> @Model.Question1</p>
+                 <br />
+                 <p><b>Posted by @Model.username</b></p>
+                 <br />
+                
+                 <br /><br />

@@ -1,0 +1,199 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@using CSharpProject.Models
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>YourQuestions</title>
+@Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/bootstrap.css")
+
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/jquery")    
+    @Scripts.Render("~/bundles/jqueryui")
+    
+
+    
+</head>
+<body>
+
+    <!-- Header Section -->
+
+    <!-- Master Navigation -->
+
+        
+    <nav class="navbar navbar-inverse " role="navigation">
+        <div class="container" >
+             <img src="/Content/images/csharp.jpg"  alt="Csharp Tutor" style="float:left"/>
+
+            <form action="/Client/Search" method="post">
+                <input type="text" name="search" id="search" />
+               
+                <button type="submit" style="background-color:#36dcdc">
+                <span class="glyphicon glyphicon-search"></span>&nbsp;Search</button>   
+                
+            </form>
+             <!-- for auto search -->
+            <script>
+                $(document).ready(function () {
+                    $('#search').autocomplete(
+                    {
+                        source: "/Client/QuickSearch"
+                    });
+                })
+
+            </script> 
+
+
+            <ul class="nav navbar-nav" style="float:right">
+
+
+
+                <li class="active" style="background-color:#f6b04f; border-bottom-left-radius:10px; border-bottom-right-radius:10px; border-top-right-radius:10px; border-top-left-radius:10px; border-bottom-color:black">
+                    <a href="/Client/Index" style="color:whitesmoke"><span class="glyphicon glyphicon-home">&nbsp;Home </span> </a></li>
+                
+                <li style="background-color:#f6b04f; border-bottom-left-radius:10px; border-bottom-right-radius:10px; border-top-right-radius:10px; border-top-left-radius:10px; border-bottom-color:black">
+                    <a href="/Client/AskQuestion" style="color:whitesmoke"><span class="glyphicon glyphicon-question-sign">&nbsp;Ask a Question</span></a></li>
+                <li style="background-color:#f6b04f; border-bottom-left-radius:10px; border-bottom-right-radius:10px; border-top-right-radius:10px; border-top-left-radius:10px; border-bottom-color:black">
+                    <a href="/Client/SeeQuestions" style="color:whitesmoke"><span class="glyphicon glyphicon-eye-open">&nbsp;See Questions </span></a></li>
+
+                <li style="background-color:#f6b04f; border-bottom-left-radius:10px; border-bottom-right-radius:10px; border-top-right-radius:10px; border-top-left-radius:10px; border-bottom-color:black">
+                    <a href="/Client/ViewProfile" style="color:whitesmoke"><span class="glyphicon glyphicon-user">&nbsp;View Profile</span></a></li>
+
+                <li style="background-color:#f6b04f; border-bottom-left-radius:10px; border-bottom-right-radius:10px; border-top-right-radius:10px; border-top-left-radius:10px; border-bottom-color:black">
+                    <a href="/Client/Logout" style="color:whitesmoke"><span class="glyphicon glyphicon-arrow-down">&nbsp;Logout </span></a></li>
+
+                
+                
+      </ul>
+
+            </div>
+        </nav>
+
+
+
+                
+
+    
+    
+
+    
+
+     <div class="container">
+
+          
+          
+            
+            <div class="row" >
+            <div class="col-xs-7 col-md-9" >
+
+                @foreach(Question q in Model)
+                 {
+    
+                     
+                    <div style="background-color:wheat; padding-top:1em; padding-right:1em; padding-left:1em">
+                    <h4>@q.Question1</h4>
+                    <br />
+                        @Html.ActionLink("Remove this Question", "DeleteQuestion", new { id=q.Id})
+                        
+                    
+                    @if (q.ProfilePicture != null)
+                    {
+                        <img src="~/ProfilePictures/@q.ProfilePicture" alt="Image" style="width:50px; height:50px; float:right"/>
+                    }
+                    <b style="float:right">Posted by: @q.username</b> <br />
+                    <b style="float:right">Posted at: @q.Date</b>
+                     <br />
+
+                     
+                        <br />
+                    
+                     </div>
+                     <br /><br />
+                 }
+                
+                <br /><br /><br /><br /><br /><br />
+                
+                </div>
+
+         
+                <!-- Menu -->
+
+              
+            <div class="col-xs-6 col-md-8" style="background-color:white">
+            
+               
+
+                <br />
+
+
+              
+                </div>
+         </div>
+
+    </div>
+    
+           <br /><br />
+   
+   
+        <!-- Footer -->
+
+    <footer style="background-color:#f6b04f; border:double; border-color:orangered">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3 footer-box wow fadeInUp">
+                        <h4 style="color:white"><b>About Us</b></h4>
+                        <div class="footer-box-text">
+	                        <p style="color:whitesmoke">
+	                        	C# Tutor is a Question Answer site for beginners to help them understand basics of C#.
+                                It is a single platform offering lectures of C# basics.
+	                        </p>
+	                        
+                        </div>
+                    </div>
+                    
+                    
+        
+                    <div class="col-sm-3 footer-box wow fadeInDown">
+                       
+                    </div>
+                    <div class="col-sm-3 footer-box wow fadeInUp">
+                        
+                    </div>
+                    <div class="col-sm-3 footer-box wow fadeInDown">
+                        <h4 style="color:white"><b>Contact Us </b></h4>
+                        <div class="footer-box-text footer-box-text-contact">
+	                        <p style="color:whitesmoke"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Address: Punjab University College of Information Technology, Allama Iqbal, Old Campus, The Mall road, Lahore</p>
+	                       
+	                        <p style="color:whitesmoke"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp; Email: bitf12m032@pucit.edu.pk</p>
+                        </div>
+                        <img src="/Content/images/facebook_40x40.png" alt="Follow me on facebook"/>
+                        <img src="/Content/images/twitter-b_40x40.png" alt="Follow me on twitter" />
+                    </div>
+                </div>
+                <div class="row">
+                	<div class="col-sm-12 wow fadeIn">
+                		<div class="footer-border"></div>
+                	</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-7 footer-copyright wow fadeIn">
+                        <p style="color:whitesmoke">&copy; @DateTime.Now.Year - All rights reserved by BITF12M032</p>
+                    </div>
+                    <div class="col-sm-5 footer-social wow fadeIn">
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+
+
+    
+</body>
+</html>

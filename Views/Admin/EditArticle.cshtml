@@ -1,0 +1,172 @@
+﻿@{
+    Layout = null;
+}
+@model CSharpProject.Models.Article
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EditArticle</title>
+ 
+
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+     <link href="/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="~/js/cufon-yui.js"></script>
+    <script type="text/javascript" src="~/js/georgia.js"></script>
+    <script type="text/javascript" src="~/js/cuf_run.js"></script>
+    <script src="~/js/jquery.js" type="text/javascript"></script>
+
+    <!-- Start WOWSlider.com HEAD section -->
+    <link rel="stylesheet" type="text/css" href="~/engine1/style.css" />
+    <script type="text/javascript" src="~/engine1/jquery.js"></script>
+    <!-- End WOWSlider.com HEAD section -->
+</head>
+<body>
+<div class="main">
+  <div class="header">
+    <div class="header_resize">
+      <div class="logo">
+        <h1><a href="index.html"><span>C#</span>Tutor<small>Learn to Code</small></a></h1>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="/Admin/Index" class="active">Home</a></li>
+          <li><a href="/Admin/PostArticle">Post Article</a></li>
+		  <li><a href="/Admin/Logout">Logout</a></li>
+          <li><a href="/Admin/ViewQuestions">View Questions</a></li>
+          <li><a href="/Admin/ViewUsers">View Users</a></li>
+          
+        </ul>
+      </div>
+       
+    
+	  
+	
+  
+  <!-- Start WOWSlider.com BODY section -->
+<div id="wowslider-container1">
+<div class="ws_images"><ul>
+		<li><img src="/data1/images/.netframework.jpg" alt=".Net-framework" title=".Net-framework" id="wows1_0"/></li>
+		<li><img src="/data1/images/c_programming.jpg" alt="C# programming" title="C# programming" id="wows1_1"/></li>
+		<li><img src="/data1/images/c_tutor.jpg" alt="C# Tutor" title="C# Tutor" id="wows1_2"/></li>
+		<li><img src="/data1/images/c_tutorial.jpg" alt="C# Tutorial" title="C# Tutorial" id="wows1_3"/></li>
+		<li><img src="/data1/images/c_tutorialz.jpg" alt="C# Tutorialz" title="C# Tutorialz" id="wows1_4"/></li>
+		<li><img src="/data1/images/ctutorials.jpg" alt="C#Tutorials" title="C#Tutorials" id="wows1_5"/></li>
+		<li><img src="/data1/images/learn_c_programming.png" alt="Learn C# Programming" title="Learn C# Programming" id="wows1_6"/></li>
+		<li><img src="/data1/images/learn_to_code_like_a_ninja.png" alt="Learn to Code Like a Ninja" title="Learn to Code Like a Ninja" id="wows1_7"/></li>
+		<li><a href="http://wowslider.com"><img src="/data1/images/learn_to_code.jpg" alt="slider bootstrap" title="Learn to Code" id="wows1_8"/></a></li>
+		<li><img src="/data1/images/visual_c.jpg" alt="Visual C#" title="Visual C#" id="wows1_9"/></li>
+	</ul></div>
+	<div class="ws_bullets"><div>
+		<a href="#" title=".Net-framework"><span><img src="/data1/tooltips/.netframework.jpg" alt=".Net-framework"/>1</span></a>
+		<a href="#" title="C# programming"><span><img src="/data1/tooltips/c_programming.jpg" alt="C# programming"/>2</span></a>
+		<a href="#" title="C# Tutor"><span><img src="/data1/tooltips/c_tutor.jpg" alt="C# Tutor"/>3</span></a>
+		<a href="#" title="C# Tutorial"><span><img src="/data1/tooltips/c_tutorial.jpg" alt="C# Tutorial"/>4</span></a>
+		<a href="#" title="C# Tutorialz"><span><img src="/data1/tooltips/c_tutorialz.jpg" alt="C# Tutorialz"/>5</span></a>
+		<a href="#" title="C#Tutorials"><span><img src="/data1/tooltips/ctutorials.jpg" alt="C#Tutorials"/>6</span></a>
+		<a href="#" title="Learn C# Programming"><span><img src="/data1/tooltips/learn_c_programming.png" alt="Learn C# Programming"/>7</span></a>
+		<a href="#" title="Learn to Code Like a Ninja"><span><img src="/data1/tooltips/learn_to_code_like_a_ninja.png" alt="Learn to Code Like a Ninja"/>8</span></a>
+		<a href="#" title="Learn to Code"><span><img src="/data1/tooltips/learn_to_code.jpg" alt="Learn to Code"/>9</span></a>
+		<a href="#" title="Visual C#"><span><img src="/data1/tooltips/visual_c.jpg" alt="Visual C#"/>10</span></a>
+	</div></div><div class="ws_script" style="position:absolute;left:-99%"><a href="http://wowslider.net">jquery slider</a> by WOWSlider.com v8.2</div>
+<div class="ws_shadow"></div>
+</div>	
+<script type="text/javascript" src="~/engine1/wowslider.js"></script>
+<script type="text/javascript" src="~/engine1/script.js"></script>
+<!-- End WOWSlider.com BODY section -->
+  
+  </div>
+      </div>
+  
+         <div class="container" style="padding-left:8em">
+
+
+          <div class="row" >
+            <div class="col-xs-6 col-md-6" style="background-color:#d1efef; border-color:#fff">
+        
+          <h2>Edit Article</h2>
+        
+		<!--Post New Article-->
+
+         @using(Html.BeginForm("Edit", "Admin", FormMethod.Post, new {enctype = "multipart/form-data"} ))
+         {
+		
+             @Html.HiddenFor(m=>m.Id)
+		 
+          <div class="form-group input-group" style="padding-top:2em">
+           
+          @Html.EditorFor(m=>m.Title_, new { @class = "form-control", required="true" })
+                   
+          </div>
+
+           <div class="form-group input-group" style="padding-right:2em">
+            Insert Image: <input class="form-control" type="file" name="image" value=""/> 
+               @Html.EditorFor(m=>m.Image)    
+            </div>
+
+            
+
+             <div class="form-group input-group" style="padding-right:2em">
+            Insert File: <input class="form-control" type="file" name="file" value=""/> 
+               @Html.EditorFor(m=>m.File)    
+            </div> 
+
+
+            <div class="form-group input-group" style="padding-top:2em; padding-right:2em"> 
+
+            
+             @Html.EditorFor(m=>m.Content, new { @class = "form-control", required="true" })
+            
+            </div>
+
+            <h4>Tags: </h4>
+            <div class="form-group input-group" style="padding-right:2em">
+            @Html.EditorFor(m=>m.Tags,  new { @class = "form-control", required="true" })
+                     
+            </div>
+
+            <div class="form-group">
+            <button type="submit">
+            <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Save</button>   
+            </div>
+          
+         } 
+		
+		
+		<!--Form Ended -->
+		
+        </div>
+
+             
+
+     </div>
+
+             </div>
+
+    <br /> <br />
+  
+  <footer>
+  
+  <div class="footer">
+    <div class="footer_resize">
+      <p class="lf">Copyright &copy; All Rights Reserved by BITF12M032</p>
+      <br />
+        <br />
+      <div class="clr"></div>
+    </div>
+    <div class="clr"></div>
+  </div>
+  </footer>
+  
+        <!-- Footer -->
+
+    
+    
+    
+  
+
+
+</body>
+</html>
+
