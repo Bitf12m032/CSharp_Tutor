@@ -15,13 +15,13 @@
                      
                      @if(ans.Image != null)
                      {
-                         <img src="~/Answers/@ans.Image" alt="Image" style="width:80px; height:80px"/>
+                         <img src="~/Content/Answers/@ans.Image" alt="Image" style="width:80px; height:80px"/>
                          <br /><br />
                      }
 
                     @if (ans.ProfilePicture != null)
                     {
-                        <img src="~/ProfilePictures/@ans.ProfilePicture" alt="Image" style="width:50px; height:50px; float:right"/>
+                        <img src="~/Content/ProfilePictures/@ans.ProfilePicture" alt="Image" style="width:50px; height:50px; float:right"/>
                     }
                     <b style="float:right">Answered by: @ans.username</b> <br />
                     <b style="float:right">Answered at: @ans.Date</b>

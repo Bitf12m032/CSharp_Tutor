@@ -103,13 +103,13 @@
                      
                      @if(ans.Image != null)
                      {
-                         <img src="~/Answers/@ans.Image" alt="Image" style="width:200px; height:200px"/>
+                         <img src="~/Content/Answers/@ans.Image" alt="Image" style="width:200px; height:200px"/>
                          <br /><br />
                      }
 
                     @if (ans.ProfilePicture != null)
                     {
-                        <img src="~/ProfilePictures/@ans.ProfilePicture" alt="Image" style="width:50px; height:50px; float:right"/>
+                        <img src="~/Content/ProfilePictures/@ans.ProfilePicture" alt="Image" style="width:50px; height:50px; float:right"/>
                     }
                     <b style="float:right">Posted by: @ans.username</b> <br />
                     <b style="float:right">Posted at: @ans.Date</b>

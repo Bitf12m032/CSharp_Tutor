@@ -14,7 +14,7 @@
 @if(Model.Image != null)
 {
 
-<img src="~/ArticlesImages/@Model.Image" alt="image" style="width:200px; height:200px" />
+<img src="~/Content/ArticlesImages/@Model.Image" alt="image" style="width:200px; height:200px" />
     <br />
 }
 
@@ -25,7 +25,7 @@
 @if(Model.File != null)
 {
     <h4>You can download relevant material here: </h4>
-    <a href="~/files/@Model.File" download style="font-size:18px">@Model.File</a>
+    <a href="~/Content/files/@Model.File" download style="font-size:18px">@Model.File</a>
 }
 <br /><br /><br /><br /><br />
 
